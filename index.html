@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tết của Nàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/react-image-crop/dist/ReactCrop.css">
+    <style>
+      body {
+        font-family: 'Be Vietnam Pro', sans-serif;
+        /* New Tết-themed gradient background */
+        background: linear-gradient(135deg, #FFF1F2 0%, #FEFCE8 100%);
+      }
+      /* Disable text selection */
+      body, * {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard syntax */
+      }
+      /* Prevent dragging/saving on UI images, but not on result images */
+      img:not(.allow-context-menu) {
+        pointer-events: none; /* Prevent dragging images */
+      }
+       /* Re-enable interaction for the cropper component */
+      .ReactCrop__child-wrapper, 
+      .ReactCrop__image,
+      .ReactCrop__crop-selection {
+        -webkit-user-select: auto;
+        user-select: auto;
+        -webkit-touch-callout: auto;
+      }
+      .ReactCrop__image {
+        pointer-events: auto;
+      }
+      /* Allow interaction for downloadable images */
+      .allow-context-menu {
+        -webkit-user-select: auto;
+        user-select: auto;
+        -webkit-touch-callout: auto;
+        pointer-events: auto;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.22.0",
+    "react-image-crop": "https://esm.sh/react-image-crop@11.0.5"
+  }
+}
+</script>
+</head>
+  <body class="text-zinc-900">
+    <div id="root"></div>
+    <script>
+      // Anti-copying measures
+      
+      // 1. Disable right-click context menu, except for specific elements
+      document.addEventListener('contextmenu', event => {
+        // Allow context menu for downloadable images
+        if (event.target.classList && event.target.classList.contains('allow-context-menu')) {
+          return;
+        }
+        event.preventDefault();
+      });
+
+      // 2. Disable keyboard shortcuts for developer tools
+      document.addEventListener('keydown', function(event) {
+        // F12
+        if (event.keyCode === 123) {
+          event.preventDefault();
+        }
+        // Ctrl+Shift+I
+        if (event.ctrlKey && event.shiftKey && event.keyCode === 73) {
+          event.preventDefault();
+        }
+        // Ctrl+Shift+J
+        if (event.ctrlKey && event.shiftKey && event.keyCode === 74) {
+          event.preventDefault();
+        }
+        // Ctrl+U
+        if (event.ctrlKey && event.keyCode === 85) {
+          event.preventDefault();
+        }
+        // Ctrl+S
+        if (event.ctrlKey && event.keyCode === 83) {
+           event.preventDefault();
+        }
+      });
+      
+      // 3. Log a warning message to the console
+      (function() {
+        try {
+          const style = 'font-family:monospace; color: red; font-size: 24px; font-weight: bold;';
+          const warning = 'DỪNG LẠI!';
+          const message = 'Đây là một tính năng của trình duyệt dành cho các nhà phát triển. Nếu ai đó bảo bạn sao chép và dán nội dung nào đó vào đây để bật một tính năng hoặc "hack" một thứ gì đó, đó là một hành vi lừa đảo và sẽ cho phép họ truy cập vào tài khoản của bạn hoặc đánh cắp thông tin của bạn.';
+          
+          if (window.console && window.console.log) {
+            setTimeout(console.log.bind(console, `%c${warning}`, style), 0);
+            setTimeout(console.log.bind(console, message), 0);
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>
